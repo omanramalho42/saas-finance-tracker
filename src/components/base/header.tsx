@@ -12,7 +12,7 @@ const Header:React.FC = () => {
         <Link href="/">
           <Image
             src="/assets/icons/logo.svg"
-            alt="Signalist logo"
+            alt="saas-finance-tracker"
             width={140}
             height={32}
             className="h-8 w-auto cursor-pointer"
