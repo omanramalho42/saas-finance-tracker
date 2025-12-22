@@ -1,7 +1,6 @@
 import { inngest } from "@/lib/inngest/client"
 import { PERSONALIZED_WELCOME_EMAIL_PROMPT } from "./prompt"
-import { success } from "better-auth"
-import { sendWelcomeEmail } from "../nodemailer"
+import { sendWelcomeEmail } from "@/lib/nodemailer"
 
 export const sendSignUpEmail = inngest.createFunction(
   { id: "sign-up-email" },
