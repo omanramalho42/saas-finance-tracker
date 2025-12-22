@@ -3,13 +3,12 @@
 import { useRouter } from "next/navigation"
 
 import { useForm } from 'react-hook-form'
+import { toast } from "sonner"
 
 import { Button } from '@/components/ui/button'
 import InputField from '@/components/forms/input-field'
 import FooterLink from '@/components/forms/footer-link'
-// import { signInWithEmail, signUpWithEmail } from "@/lib/actions/auth.actions"
-// import { toast } from "sonner"
-// import { signInEmail } from "better-auth/api"
+import { signInWithEmail } from "@/lib/actions/auth.actions"
 
 export default function SignIn() {
   const router = useRouter()
@@ -27,13 +26,13 @@ export default function SignIn() {
 
   const onSubmit = async (data: SignInFormData) => {
     try {
-      // const result = await signInWithEmail(data)
-      // if(result.success) router.push('/')
+      const result = await signInWithEmail(data);
+      if(result.success) router.push('/');
     } catch (e) {
-      console.error(e)
-      // toast.error('Sign in failed', {
-      //   description: e instanceof Error ? e.message : 'Failed to sign in.'
-      // })
+      console.error(e);
+      toast.error('Sign in failed', {
+        description: e instanceof Error ? e.message : 'Failed to sign in.'
+      })
     }
   }
 

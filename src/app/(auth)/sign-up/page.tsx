@@ -2,7 +2,12 @@
 
 import React from 'react'
 
+import { useRouter } from "next/navigation"
+
 import { SubmitHandler, useForm } from 'react-hook-form'
+
+import { signUpWithEmail } from "@/lib/actions/auth.actions"
+import { toast } from "sonner"
 
 import { CountrySelectField } from '@/components/forms/country-select-field'
 
@@ -18,6 +23,7 @@ import {
 } from '@/lib/constants'
 
 export default function SignUp() {
+  const router = useRouter()
 
   const {
     register,
@@ -37,11 +43,15 @@ export default function SignUp() {
     mode: "onBlur"
   }, )
 
-  const onSubmit: SubmitHandler<SignUpFormData> = (data) => {
+  const onSubmit: SubmitHandler<SignUpFormData> = async (data) => {
     try {
-      console.log(data)
+      const result = await signUpWithEmail(data)
+      if (result.success) router.push('/');
     } catch (error) {
       console.log(error)
+      toast.error('Sign up failed', {
+        description: error instanceof Error ? error.message : 'Failed to create an account.'
+      })
     }
   }
 
@@ -66,10 +76,10 @@ export default function SignUp() {
         <InputField
           name="email"
           label="Email"
-          placeholder="johndoe@example.com"
+          placeholder="contact@jsmastery.com"
           register={register}
           error={errors.email}
-          validation={{ required: "Email is required", pattern: /^\W+@\w+\.\w+$/, message: 'Email address is required'  }}
+          validation={{ required: 'Email name is required', pattern: /^\w+@\w+\.\w+$/, message: 'Email address is required' }}
         />
         <InputField
           name="password"
