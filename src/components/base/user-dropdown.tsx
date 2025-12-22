@@ -38,7 +38,9 @@ const UserDropdown:React.FC = () => {
         >
           <Avatar className='h-8 w-8'>
             <AvatarImage src="https://github.com/omanramalho42.png" />
-            <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold" >
+            <AvatarFallback
+              className="bg-yellow-500 text-yellow-900 text-sm font-bold"
+            >
               {user?.name[0]}
             </AvatarFallback>
           </Avatar>
@@ -50,23 +52,26 @@ const UserDropdown:React.FC = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='text-gray-400'>
-        <DropdownMenuLabel>
-          <div className="flex relative items-center gap-3 py-2">
-            <Avatar className='h-10 w-10'>
-              <AvatarImage
-                src="https://github.com/omanramalho42.png"
-              />
-              <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold" >
-                {user.name[0]}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col">
-              <span className="text-sm text-gray-500">
-                { user.email }
-              </span>
+          <DropdownMenuLabel>
+            <div className="flex relative items-center gap-3 py-2">
+              <Avatar className="h-10 w-10">
+                <AvatarImage
+                  src="https://github.com/omanramalho42.png"
+                />
+                <AvatarFallback
+                  className="bg-yellow-500 text-yellow-900 text-sm font-bold"
+                >
+                  {user.name[0]}
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col">
+                <span className='text-base font-medium text-gray-400'>
+                  {user.name}
+                </span>
+                <span className="text-sm text-gray-500">{user.email}</span>
+              </div>
             </div>
-          </div>
-        </DropdownMenuLabel>
+          </DropdownMenuLabel>
         <DropdownMenuSeparator className='bg-gray-600' />
         <DropdownMenuItem
           onClick={handleSignOut}
