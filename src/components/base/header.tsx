@@ -7,7 +7,7 @@ import UserDropdown from './user-dropdown'
 
 const Header:React.FC = () => {
   return (
-    <div className='sticky top-0 header'>
+    <header className='sticky top-0 header'>
       <div className="container header-wrapper">
         <Link href="/">
           <Image
@@ -25,7 +25,7 @@ const Header:React.FC = () => {
         {/* UserDropdown */}
         <UserDropdown />
       </div>
-    </div>
+    </header>
   )
 }
 
