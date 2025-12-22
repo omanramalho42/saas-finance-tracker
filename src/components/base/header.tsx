@@ -5,7 +5,7 @@ import React from 'react'
 import NavItems from './nav-items'
 import UserDropdown from './user-dropdown'
 
-const Header:React.FC = () => {
+const Header:React.FC<{ user: User }> = ({ user }: { user: User }) => {
   return (
     <header className='sticky top-0 header'>
       <div className="container header-wrapper">
@@ -23,7 +23,7 @@ const Header:React.FC = () => {
           <NavItems />
         </nav>
         {/* UserDropdown */}
-        <UserDropdown />
+        <UserDropdown user={user} />
       </div>
     </header>
   )

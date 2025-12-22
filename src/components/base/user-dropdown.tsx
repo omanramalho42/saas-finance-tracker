@@ -19,15 +19,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { LogOut } from 'lucide-react'
 import NavItems from './nav-items'
+import { signOut } from '@/lib/actions/auth.actions'
 
-const UserDropdown:React.FC = () => {
+const UserDropdown:React.FC<{ user: User }> = ({ user }: { user: User }) => {
   const router: AppRouterInstance = useRouter()
 
   const handleSignOut = async ():Promise<void> => {
+    await signOut()
     router.push("/sign-in")
   }
-
-  const user = { name: "John", email: "johndoe@example.com" }
 
   return (
     <DropdownMenu>
