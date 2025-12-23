@@ -5,11 +5,10 @@ import Link from 'next/link'
 
 import React from 'react'
 
-import { cn } from '@/lib/utils'
-
+import SearchCommand from "@/components/base/search-command"
 import { NAV_ITEMS } from '@/lib/constants'
 
-const NavItems:React.FC = () => {
+const NavItems:React.FC<{ initialStocks: StockWithWatchlistStatus[]}> = ({ initialStocks }: { initialStocks: StockWithWatchlistStatus[]}) => {
   const pathname: string = usePathname()
 
   const isActive = (path: string) => {
@@ -20,23 +19,27 @@ const NavItems:React.FC = () => {
 
   return (
     <ul className="flex flex-col sm:flex-row p-2 gap-3 sm:gap-10 font-medium">
-      {NAV_ITEMS.map(({ href, label }) => (
-        <li key={href}>
-          <Link
-            href={href}
-            className={
-              cn(
-                'hover:text-yellow-500 transition-colors', 
-                {
-                  'text-gray-100': isActive(href)
-                }
-              )
-            }
-          >
-            { label }
-          </Link>
-        </li>
-      ))}
+      {NAV_ITEMS.map(({ href, label }) => {
+        if(href === '/search') return (
+          <li key="search-trigger">
+            <SearchCommand
+              renderAs="text"
+              label="Search"
+              initialStocks={initialStocks}
+            />
+          </li>
+        )
+
+        return (
+          <li key={href}>
+            <Link
+              href={href}
+              className={`hover:text-yellow-500 transition-colors ${isActive(href) ? 'text-gray-100' : ''}`}
+            >
+              { label }
+            </Link>
+          </li>)
+      })}
     </ul>
   )
 }
