@@ -98,7 +98,7 @@ export const formatArticle = (
 });
 
 export const formatChangePercent = (changePercent?: number) => {
-  if (!changePercent) return '';
+  if (changePercent == null) return '';
   const sign = changePercent > 0 ? '+' : '';
   return `${sign}${changePercent.toFixed(2)}%`;
 };
@@ -130,10 +130,12 @@ export const getAlertText = (alert: Alert) => {
   return `Price ${condition} ${formatPrice(alert.threshold)}`;
 };
 
-export const getFormattedTodayDate = () => new Date().toLocaleDateString('en-US', {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'UTC',
-});
+export function getFormattedTodayDate() {
+  return new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+}
