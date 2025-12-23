@@ -19,15 +19,18 @@ if(!cached) {
 }
 
 export const connectToDatabase = async () => {
-  if(!MONGODB_URI) throw new Error("MONGODB_URI must be within .env")
+  if (!MONGODB_URI) {
+    throw new Error("MONGODB_URI must be within .env")
+  }
 
-  if(cached.conn) return cached.conn
+  if (cached.conn) {
+    return cached.conn
+  }
 
-  if(!cached.promise) {
-    cached.promise =
-      mongoose.connect(
-        MONGODB_URI, { bufferCommands : false }
-      )
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI, {
+      bufferCommands: false,
+    })
   }
 
   try {
@@ -37,5 +40,10 @@ export const connectToDatabase = async () => {
     throw error
   }
 
-  console.log(`Connected to databse ${process.env.NODE_ENV} - ${MONGODB_URI}`)
+  console.log(
+    `Connected to database ${process.env.NODE_ENV} - ${MONGODB_URI}`
+  )
+
+  /** ✅ ISSO É O QUE FALTAVA */
+  return cached.conn
 }
